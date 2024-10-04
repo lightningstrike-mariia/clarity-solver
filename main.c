@@ -133,7 +133,7 @@ int main()
 	unsigned int n;
 	
 	FILE* problem;
-	problem = fopen("/home/mariika/tpfile.txt","r");
+	problem = fopen("tpfile.txt","r");
 
 	fscanf(problem, "%d,%d",&m,&n);
 
