@@ -1,5 +1,3 @@
-I'm trying to write a README file
-
 This C program is a raw implementation of Vogel's approximation method and a student project.
 It's designed to calculate the initial basic feasible solution to a transportation problem.
 
