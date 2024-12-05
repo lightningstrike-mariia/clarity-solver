@@ -678,5 +678,68 @@ int main()
 	}
 	printf("\n");
 
+		// 03.12.2024
+	int u_arr[x];
+	int v_arr[y];
+	bool u_solved[x];
+	bool v_solved[y];
+	struct cell u_buff[x];
+	struct cell v_buff[y];
+	int len;
+
+	u_arr[0] = 0;
+
+		for (i=1;i<x;i++)
+	{
+		u_arr[i] = false;
+	}
+
+	u_solved[0] = true;
+
+	for (i=0;i<y;i++)
+	{
+		v_arr[i] = false;
+	}
+
+	struct where_reg pos_reg;
+
+	i=1;
+	
+	//for(i=0;i<y;i++)
+	  //printf("-%d-", v_solved[i]);
+
+  for(j=0;j<x;j++)
+  {
+    printf("(< %d >) ", u_solved[j]);
+    if (solutions[i][j].isbasic == true && u_solved[j] == true && v_solved[i]==false)
+  	{
+  		v_arr[i] = solutions[i][j].cost - u_arr[j];
+  		v_solved[i] = true;
+  	}
+  }
+  
+  j=1;
+  
+  for(i=0;i<y;i++)
+  {
+    printf("(< %d >) ", v_solved[i]);
+    if (solutions[i][j].isbasic == true && v_solved[j] == true && u_solved[i]==false)
+  	{
+  		u_arr[i] = solutions[i][j].cost - v_arr[j];
+  		u_solved[i] = true;
+  	}
+  }
+  
+	for(i=0;i<x;i++)
+	  printf("_%d_", u_arr[i]);
+	printf(" ");  
+	
+	for(i=0;i<y;i++)
+	  printf("-%d-", v_arr[i]);
+	 printf(" ");
+	  
+	for(i=0;i<y;i++)
+	  printf("_%d_", u_solved[i]);
+
 	return 0;
 }
