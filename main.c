@@ -703,11 +703,15 @@ int main()
 
 	struct where_reg pos_reg;
 
+		int testcounter = 1;
+
 	i=1;
 	
 	//for(i=0;i<y;i++)
 	  //printf("-%d-", v_solved[i]);
 
+  while(testcounter < (x+y))
+  {
   for(j=0;j<x;j++)
   {
     printf("(< %d >) ", u_solved[j]);
@@ -723,23 +727,29 @@ int main()
   for(i=0;i<y;i++)
   {
     printf("(< %d >) ", v_solved[i]);
-    if (solutions[i][j].isbasic == true && v_solved[j] == true && u_solved[i]==false)
-  	{
+    if (solutions[i][j].isbasic == true && v_solved[i] == true && u_solved[j]==false)
+    {
   		u_arr[i] = solutions[i][j].cost - v_arr[j];
   		u_solved[i] = true;
-  	}
+    }
   }
+  testcounter+=1;
   
+  printf("\n");
 	for(i=0;i<x;i++)
-	  printf("_%d_", u_arr[i]);
-	printf(" ");  
+    printf("_%d_", u_arr[i]);
+	printf("\n");  
 	
 	for(i=0;i<y;i++)
-	  printf("-%d-", v_arr[i]);
-	 printf(" ");
+    printf("-%d-", v_arr[i]);
+	 printf("\n");
 	  
 	for(i=0;i<y;i++)
-	  printf("_%d_", u_solved[i]);
-
+    printf("_%d_", u_solved[i]);
+	printf("\n");
+	  
+	for(i=0;i<x;i++)
+    printf("_%d_", v_solved[i]);
+  }
 	return 0;
 }
