@@ -19,7 +19,7 @@ int find2Min(int* arrptr, int len)
 			mins[0] = arrptr[j];
 			indices[0] = j;
 			break;
-		}	
+		}
 	}
 
 	for (j=0;j<len;j++)
@@ -38,7 +38,7 @@ int find2Min(int* arrptr, int len)
 			mins[1] = arrptr[j];
 			indices[1] = j;
 			break;
-		}	
+		}
 	}
 
 	for (j=0;j<len;j++)
@@ -78,7 +78,7 @@ int find2Min(int* arrptr, int len)
 	if (three == true && mins[1] == mins[0] )
 		return abs(mins[2]-mins[0]);
 	else
-		return abs(mins[1]-mins[0]);	
+		return abs(mins[1]-mins[0]);
 }
 
 int find1Min(int* arrptr, int len)
@@ -86,7 +86,7 @@ int find1Min(int* arrptr, int len)
 	int j = 0;
 	int min;
 	int minpos=0;
-	
+
 	for (j=0;j<len;j++)
 	{
 		if (arrptr[j]>=0)
@@ -137,14 +137,14 @@ int main()
 
 	unsigned int m;
 	unsigned int n;
-	
+
 	FILE* problem;
-	problem = fopen("tpfile.txt","r");
+	problem = fopen("C:\Users\mariikas2023\Documents\vogel-approximation-method-in-c-main\CLARITY\tpfile.txt","r");
 
 	fscanf(problem, "%d,%d",&m,&n);
 
 	printf("\nВ исходной задаче строк: %d; столбцов: %d;\n",m,n);
-	
+
 	int inp_arr[m][n];
 
 	for(i=0;i<m;i++)
@@ -172,15 +172,15 @@ int main()
 	}
 
 	fclose(problem);
-		
+
 	unsigned int sup_sum = 0;
 	unsigned int dem_sum = 0;
-	
+
 	for(i=0; i<m; i++)
 	{
 		sup_sum += sup[i];
 	}
-	
+
 	for(i=0; i<n; i++)
 	{
         	dem_sum += dem[i];
@@ -204,9 +204,9 @@ int main()
 
 	if (sup_sum > dem_sum)
 	{
-		x += 1; 		
+		x += 1;
 	}
-	
+
 	if (dem_sum > sup_sum)
 	{
 		y += 1;
@@ -309,7 +309,7 @@ int main()
 			if (yignored[i] == true )
 			{
 				s_delta[i] = -1;
-			} 
+			}
 			else
 			{
 				for (j=0;j<x;j++)
@@ -342,8 +342,8 @@ int main()
 				printf(" штраф: %d\n",find2Min(ybuff,y));
 			}
 		}
-		
-		printf("\n");	
+
+		printf("\n");
 
 		maxdelta.where = 'n';
 
@@ -391,7 +391,7 @@ int main()
 				maxdelta.pos = i;
 			}
 		}
-	
+
 		printf("\nНаибольший штраф: %d;\n(информация для отладки:\nгде находится: \"%c\";\nместо в массиве штрафов: %d)",
 			maxdelta.val, maxdelta.where, maxdelta.pos+1);
 
@@ -451,11 +451,11 @@ int main()
 				cols--;
 
 			}
-			printf("и равна %d;\n\nзначение базисной переменной x[%d;%d] = %d\n\n", 
+			printf("и равна %d;\n\nзначение базисной переменной x[%d;%d] = %d\n\n",
 				solutions[mincostpos][maxdelta.pos].cost,
-				mincostpos+1, maxdelta.pos+1,	
+				mincostpos+1, maxdelta.pos+1,
 				solutions[mincostpos][maxdelta.pos].value);
-		}	
+		}
 		else if (maxdelta.where == 's')
 		{
 			for (j=0;j<x;j++)
@@ -471,11 +471,11 @@ int main()
 				solutions[maxdelta.pos][mincostpos].value = moddem[mincostpos];
 				modsup[maxdelta.pos] -= moddem[mincostpos];
 				moddem[mincostpos] = 0;
-			
+
 				for (i=0;i<y;i++)
 				{
 					matrix[i][mincostpos] = -1;
-				}		
+				}
 				xignored[mincostpos] = true;
 				cols--;
 			}
@@ -490,7 +490,7 @@ int main()
 					matrix[maxdelta.pos][i] = -1;
 				}
 				yignored[maxdelta.pos] = true;
-			        rows--;	
+			        rows--;
 			}
 			else if (modsup[maxdelta.pos] == moddem[mincostpos])
 			{
@@ -501,12 +501,12 @@ int main()
 				for (i=0;i<y;i++)
 				{
 					matrix[i][mincostpos] = -1;
-				}	
+				}
 				xignored[mincostpos] = true;
 				cols--;
 			}
-			printf("и равна %d;\n\nзначение базисной переменной x[%d;%d] = %d\n\n",  
-				solutions[maxdelta.pos][mincostpos].cost, 
+			printf("и равна %d;\n\nзначение базисной переменной x[%d;%d] = %d\n\n",
+				solutions[maxdelta.pos][mincostpos].cost,
 				maxdelta.pos+1, mincostpos+1,
 				solutions[maxdelta.pos][mincostpos].value);
 		}
@@ -517,7 +517,7 @@ int main()
 			{
 				printf(" %d ", matrix[i][j]);
 			}
-			printf("\n");		
+			printf("\n");
 		}
 		printf("\n");
 	}
@@ -542,7 +542,7 @@ int main()
 			for(j=0;j<y;j++)
 			{
 				if(yignored[j]==false)
-					notignored = j;				
+					notignored = j;
 			}
 			for(j=0;j<x;j++)
 			{
@@ -556,7 +556,7 @@ int main()
 			for(j=0;j<x;j++)
 			{
 				if(xignored[j]==false)
-				notignored = j;				
+				notignored = j;
 			}
 			for(j=0;j<y;j++)//
 			{
@@ -564,13 +564,13 @@ int main()
 				mincostpos = find1Min(ybuff, y);
 			}
 		}
-	
+
 		if (dir =='l')
 		{
 			if (modsup[notignored] > moddem[mincostpos])
 			{
 				solutions[notignored][mincostpos].value=moddem[mincostpos];
-				solutions[notignored][mincostpos].isbasic=true;			
+				solutions[notignored][mincostpos].isbasic=true;
 				modsup[notignored]-=moddem[mincostpos];
 				moddem[mincostpos]=0;
 				xignored[mincostpos] = true;
@@ -579,7 +579,7 @@ int main()
 			else if (modsup[notignored] <  moddem[mincostpos])
 			{
 				solutions[notignored][mincostpos].value=modsup[notignored];
-				solutions[notignored][mincostpos].isbasic=true;	
+				solutions[notignored][mincostpos].isbasic=true;
 				modsup[notignored]=0;
 				moddem[mincostpos]-=modsup[notignored];
 				yignored[notignored] = true;
@@ -588,7 +588,7 @@ int main()
 			else if (modsup[notignored] = moddem[mincostpos])
 			{
 				solutions[notignored][mincostpos].value=moddem[mincostpos];
-				solutions[notignored][mincostpos].isbasic=true;			
+				solutions[notignored][mincostpos].isbasic=true;
 				modsup[notignored]-=moddem[mincostpos];
 				moddem[mincostpos]=0;
 				xignored[mincostpos] = true;
@@ -596,7 +596,7 @@ int main()
 			}
 			cols--;
 
-			printf("Базисная переменная x[%d;%d] = %d;\n\n", 
+			printf("Базисная переменная x[%d;%d] = %d;\n\n",
 				notignored+1, mincostpos+1, solutions[notignored][mincostpos].value);
 		}
 
@@ -605,7 +605,7 @@ int main()
 			if (modsup[mincostpos] > moddem[notignored])
 			{
 				solutions[mincostpos][notignored].value=moddem[notignored];
-				solutions[mincostpos][notignored].isbasic=true;	
+				solutions[mincostpos][notignored].isbasic=true;
 				modsup[mincostpos]-=moddem[notignored];
 				moddem[notignored]=0;
 				xignored[notignored] = true;
@@ -614,7 +614,7 @@ int main()
 			else if (modsup[mincostpos] <  moddem[notignored])
 			{
 				solutions[mincostpos][notignored].value=modsup[mincostpos];
-				solutions[mincostpos][notignored].isbasic=true;			
+				solutions[mincostpos][notignored].isbasic=true;
 				modsup[mincostpos]=0;
 				moddem[notignored]-=modsup[mincostpos];
 				yignored[mincostpos] = true;
@@ -623,7 +623,7 @@ int main()
 			else if (modsup[mincostpos] = moddem[notignored])
 			{
 				solutions[mincostpos][notignored].value=moddem[notignored];
-				solutions[mincostpos][notignored].isbasic=true;		
+				solutions[mincostpos][notignored].isbasic=true;
 				modsup[mincostpos]-=moddem[notignored];
 				moddem[notignored]=0;
 				xignored[notignored] = true;
@@ -631,10 +631,10 @@ int main()
 			}
 			rows--;
 
-			printf("Базисная переменная x[%d;%d] = %d;\n\n", 
+			printf("Базисная переменная x[%d;%d] = %d;\n\n",
 				 mincostpos+1, notignored+1, solutions[mincostpos][notignored].value);
 		}
-		
+
 		if (rows==0 || cols==0)
 		{
 			rows = 0;
@@ -708,22 +708,22 @@ int main()
 	}
 
 	struct where_reg pos_reg;
-	
+
 	int testcounter = 1;
 
 	//i=1;
-	
+
 	//for(i=0;i<y;i++)
 	  //printf("-%d-", v_solved[i]);
-  
+
   pos_reg.where = 'd';
   pos_reg.pos = 0;
-    
-  while(testcounter < (x+y))
+
+  while(testcounter <= (x+y))
   {
-    for(i=0;i<y;i++)
+    for(i=0;i<x;i++)
     {
-      for(j=0;j<x;j++)
+      for(j=0;j<y;j++)
       {
         printf("(< %d >) ", u_solved[j]);
         if (solutions[i][j].isbasic == true && u_solved[j] == true && v_solved[i]==false)
@@ -735,34 +735,34 @@ int main()
       }
     }
     //j=1;
-  
-    for(j=0;j<x;j++)
+
+    for(i=0;j<y;j++)
     {
-      for(i=0;i<y;i++)
+      for(j=0;i<x;i++)
       {
         printf("(< %d >) ", v_solved[i]);
-        if (solutions[i][j].isbasic == true && v_solved[i] == true && u_solved[j]==false)
+        if (solutions[j][i].isbasic == true && v_solved[j] == true && u_solved[i]==false)
         {
-  	    	u_arr[i] = solutions[i][j].cost - v_arr[j];
-  	    	u_solved[i] = true;
+  	    	u_arr[j] = solutions[j][i].cost - v_arr[i];
+  	    	u_solved[j] = true;
   	    	testcounter+=1;
         }
       }
     }
-  
+
     printf("\n");
 	  for(i=0;i<x;i++)
       printf("_%d_", u_arr[i]);
-    printf("\n");  
-	
+    printf("\n");
+
 	  for(i=0;i<y;i++)
       printf("-%d-", v_arr[i]);
 	  printf("\n");
-	  
+
 	  for(i=0;i<y;i++)
       printf("_%d_", u_solved[i]);
 	  printf("\n");
-	  
+
 	  for(i=0;i<x;i++)
       printf("_%d_", v_solved[i]);
     printf("\n");
