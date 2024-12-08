@@ -122,6 +122,12 @@ struct point
 	int val;
 };
 
+struct where_reg
+{
+	char where;
+	int pos;
+};
+
 int main()
 {
 	printf("\nВерсия Ясность\n");
@@ -678,7 +684,7 @@ int main()
 	}
 	printf("\n");
 
-		// 03.12.2024
+	// 03.12.2024
 	int u_arr[x];
 	int v_arr[y];
 	bool u_solved[x];
@@ -689,67 +695,77 @@ int main()
 
 	u_arr[0] = 0;
 
-		for (i=1;i<x;i++)
+	for (i=1;i<x;i++)
 	{
-		u_arr[i] = false;
+		u_solved[i] = false;
 	}
 
 	u_solved[0] = true;
 
 	for (i=0;i<y;i++)
 	{
-		v_arr[i] = false;
+		v_solved[i] = false;
 	}
 
 	struct where_reg pos_reg;
+	
+	int testcounter = 1;
 
-		int testcounter = 1;
-
-	i=1;
+	//i=1;
 	
 	//for(i=0;i<y;i++)
 	  //printf("-%d-", v_solved[i]);
-
+  
+  pos_reg.where = 'd';
+  pos_reg.pos = 0;
+    
   while(testcounter < (x+y))
   {
-  for(j=0;j<x;j++)
-  {
-    printf("(< %d >) ", u_solved[j]);
-    if (solutions[i][j].isbasic == true && u_solved[j] == true && v_solved[i]==false)
-  	{
-  		v_arr[i] = solutions[i][j].cost - u_arr[j];
-  		v_solved[i] = true;
-  	}
-  }
-  
-  j=1;
-  
-  for(i=0;i<y;i++)
-  {
-    printf("(< %d >) ", v_solved[i]);
-    if (solutions[i][j].isbasic == true && v_solved[i] == true && u_solved[j]==false)
+    for(i=0;i<y;i++)
     {
-  		u_arr[i] = solutions[i][j].cost - v_arr[j];
-  		u_solved[i] = true;
+      for(j=0;j<x;j++)
+      {
+        printf("(< %d >) ", u_solved[j]);
+        if (solutions[i][j].isbasic == true && u_solved[j] == true && v_solved[i]==false)
+  	    {
+  	  	  v_arr[i] = solutions[i][j].cost - u_arr[j];
+  	  	  v_solved[i] = true;
+  	  	  testcounter+=1;
+     	  }
+      }
     }
-  }
-  testcounter+=1;
+    //j=1;
   
-  printf("\n");
-	for(i=0;i<x;i++)
-    printf("_%d_", u_arr[i]);
-	printf("\n");  
+    for(j=0;j<x;j++)
+    {
+      for(i=0;i<y;i++)
+      {
+        printf("(< %d >) ", v_solved[i]);
+        if (solutions[i][j].isbasic == true && v_solved[i] == true && u_solved[j]==false)
+        {
+  	    	u_arr[i] = solutions[i][j].cost - v_arr[j];
+  	    	u_solved[i] = true;
+  	    	testcounter+=1;
+        }
+      }
+    }
+  
+    printf("\n");
+	  for(i=0;i<x;i++)
+      printf("_%d_", u_arr[i]);
+    printf("\n");  
 	
-	for(i=0;i<y;i++)
-    printf("-%d-", v_arr[i]);
-	 printf("\n");
+	  for(i=0;i<y;i++)
+      printf("-%d-", v_arr[i]);
+	  printf("\n");
 	  
-	for(i=0;i<y;i++)
-    printf("_%d_", u_solved[i]);
-	printf("\n");
+	  for(i=0;i<y;i++)
+      printf("_%d_", u_solved[i]);
+	  printf("\n");
 	  
-	for(i=0;i<x;i++)
-    printf("_%d_", v_solved[i]);
+	  for(i=0;i<x;i++)
+      printf("_%d_", v_solved[i]);
+    printf("\n");
   }
 	return 0;
 }
