@@ -716,8 +716,8 @@ int main()
 	//for(i=0;i<y;i++)
 	  //printf("-%d-", v_solved[i]);
 
-  pos_reg.where = 'd';
-  pos_reg.pos = 0;
+  //pos_reg.where = 'd';
+  //pos_reg.pos = 0;
 
   printf("\n");
 	  for(i=0;i<x;i++)
