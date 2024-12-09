@@ -139,7 +139,7 @@ int main()
 	unsigned int n;
 
 	FILE* problem;
-	problem = fopen("C:\Users\mariikas2023\Documents\vogel-approximation-method-in-c-main\CLARITY\tpfile.txt","r");
+	problem = fopen("C:\\Users\\mariikas2023\\Documents\\vogel-approximation-method-in-c-main\\CLARITY\\tpfile.txt","r");
 
 	fscanf(problem, "%d,%d",&m,&n);
 
@@ -585,7 +585,7 @@ int main()
 				yignored[notignored] = true;
 				matrix[notignored][mincostpos]=-1;
 			}
-			else if (modsup[notignored] = moddem[mincostpos])
+			else if (modsup[notignored] == moddem[mincostpos])
 			{
 				solutions[notignored][mincostpos].value=moddem[mincostpos];
 				solutions[notignored][mincostpos].isbasic=true;
@@ -620,7 +620,7 @@ int main()
 				yignored[mincostpos] = true;
 				matrix[mincostpos][notignored]=-1;
 			}
-			else if (modsup[mincostpos] = moddem[notignored])
+			else if (modsup[mincostpos] == moddem[notignored])
 			{
 				solutions[mincostpos][notignored].value=moddem[notignored];
 				solutions[mincostpos][notignored].isbasic=true;
@@ -719,38 +719,7 @@ int main()
   pos_reg.where = 'd';
   pos_reg.pos = 0;
 
-  while(testcounter <= (x+y))
-  {
-    for(i=0;i<x;i++)
-    {
-      for(j=0;j<y;j++)
-      {
-        printf("(< %d >) ", u_solved[j]);
-        if (solutions[i][j].isbasic == true && u_solved[j] == true && v_solved[i]==false)
-  	    {
-  	  	  v_arr[i] = solutions[i][j].cost - u_arr[j];
-  	  	  v_solved[i] = true;
-  	  	  testcounter+=1;
-     	  }
-      }
-    }
-    //j=1;
-
-    for(i=0;j<y;j++)
-    {
-      for(j=0;i<x;i++)
-      {
-        printf("(< %d >) ", v_solved[i]);
-        if (solutions[j][i].isbasic == true && v_solved[j] == true && u_solved[i]==false)
-        {
-  	    	u_arr[j] = solutions[j][i].cost - v_arr[i];
-  	    	u_solved[j] = true;
-  	    	testcounter+=1;
-        }
-      }
-    }
-
-    printf("\n");
+  printf("\n");
 	  for(i=0;i<x;i++)
       printf("_%d_", u_arr[i]);
     printf("\n");
@@ -765,7 +734,46 @@ int main()
 
 	  for(i=0;i<x;i++)
       printf("_%d_", v_solved[i]);
-    printf("\n");
+    printf("\n\n");
+
+  while(testcounter < x+y)
+  {
+    for(i=0;i<y;i++)
+    {
+      for(j=0;j<x;j++)
+      {
+        //printf("(< %d >) ", u_solved[j]);
+        if (solutions[i][j].isbasic == true && u_solved[j] == true && v_solved[i]==false)
+  	    {
+            v_arr[i] = solutions[i][j].cost - u_arr[j];
+            v_solved[i] = true;
+            testcounter+=1;
+        }
+        if (solutions[i][j].isbasic == true && u_solved[j] == false && v_solved[i]==true)
+  	    {
+            u_arr[j] = solutions[i][j].cost - v_arr[i];
+            u_solved[j] = true;
+            testcounter+=1;
+        }
+      }
+    }
+
+    printf("\nЗначения u:");
+	  for(i=0;i<x;i++)
+      printf(" %d ", u_arr[i]);
+    printf("\nЗначения v:");
+
+	  for(i=0;i<y;i++)
+      printf(" %d ", v_arr[i]);
+	  printf("\n");
+
+	  /*for(i=0;i<y;i++)
+      printf("_%d_", u_solved[i]);
+	  printf("\n");
+
+	  for(i=0;i<x;i++)
+      printf("_%d_", v_solved[i]);
+    printf("\n\n");*/
   }
 	return 0;
 }
