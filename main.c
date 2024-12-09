@@ -298,7 +298,7 @@ int main()
 	int rows = y;
 	int cols = x;
 
-	bool chk;
+	//bool chk;
 
 	while (rows > 1 && cols > 1)
 	{
@@ -689,9 +689,9 @@ int main()
 	int v_arr[y];
 	bool u_solved[x];
 	bool v_solved[y];
-	struct cell u_buff[x];
-	struct cell v_buff[y];
-	int len;
+	//struct cell u_buff[x];
+	//struct cell v_buff[y];
+	//int len;
 
 	u_arr[0] = 0;
 
@@ -707,7 +707,7 @@ int main()
 		v_solved[i] = false;
 	}
 
-	struct where_reg pos_reg;
+	//struct where_reg pos_reg;
 
 	int testcounter = 1;
 
