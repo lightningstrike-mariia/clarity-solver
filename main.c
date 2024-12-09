@@ -298,8 +298,6 @@ int main()
 	int rows = y;
 	int cols = x;
 
-	//bool chk;
-
 	while (rows > 1 && cols > 1)
 	{
 		printf("строки:\n");
@@ -689,9 +687,6 @@ int main()
 	int v_arr[y];
 	bool u_solved[x];
 	bool v_solved[y];
-	//struct cell u_buff[x];
-	//struct cell v_buff[y];
-	//int len;
 
 	u_arr[0] = 0;
 
@@ -707,17 +702,7 @@ int main()
 		v_solved[i] = false;
 	}
 
-	//struct where_reg pos_reg;
-
-	int testcounter = 1;
-
-	//i=1;
-
-	//for(i=0;i<y;i++)
-	  //printf("-%d-", v_solved[i]);
-
-  //pos_reg.where = 'd';
-  //pos_reg.pos = 0;
+	int cntr = 1;
 
   printf("\n");
 	  for(i=0;i<x;i++)
@@ -736,24 +721,23 @@ int main()
       printf("_%d_", v_solved[i]);
     printf("\n\n");
 
-  while(testcounter < x+y)
+  while(cntr < x+y)
   {
     for(i=0;i<y;i++)
     {
       for(j=0;j<x;j++)
       {
-        //printf("(< %d >) ", u_solved[j]);
         if (solutions[i][j].isbasic == true && u_solved[j] == true && v_solved[i]==false)
   	    {
             v_arr[i] = solutions[i][j].cost - u_arr[j];
             v_solved[i] = true;
-            testcounter+=1;
+            cntr+=1;
         }
         if (solutions[i][j].isbasic == true && u_solved[j] == false && v_solved[i]==true)
   	    {
             u_arr[j] = solutions[i][j].cost - v_arr[i];
             u_solved[j] = true;
-            testcounter+=1;
+            cntr+=1;
         }
       }
     }
@@ -766,14 +750,34 @@ int main()
 	  for(i=0;i<y;i++)
       printf(" %d ", v_arr[i]);
 	  printf("\n");
-
-	  /*for(i=0;i<y;i++)
-      printf("_%d_", u_solved[i]);
-	  printf("\n");
-
-	  for(i=0;i<x;i++)
-      printf("_%d_", v_solved[i]);
-    printf("\n\n");*/
   }
+
+  while(cntr < x*y-(x+y-1))
+  {
+      for(i=0;i<y;i++)
+    {
+      for(j=0;j<x;j++)
+      {
+        if (solutions[i][j].isbasic == false)
+  	    {
+  	        solutions[i][j].value = v_arr[i] + u_arr[j] - solutions[i][j].cost;
+            cntr+=1;
+        }
+      }
+    }
+  }
+
+  printf("\nРЕЗУЛЬТАТ\n\nМатрица значений переменных:\n");
+
+	for(i=0;i<y;i++)
+	{
+		for(j=0;j<x;j++)
+		{
+			printf(" %d ", solutions[i][j].value);
+		}
+		printf("\n");
+	}
+
+
 	return 0;
 }
