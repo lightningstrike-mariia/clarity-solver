@@ -752,6 +752,8 @@ int main()
 	  printf("\n");
   }
 
+  bool isoptimal = false;
+
   while(cntr < x*y-(x+y-1))
   {
       for(i=0;i<y;i++)
@@ -761,6 +763,7 @@ int main()
         if (solutions[i][j].isbasic == false)
   	    {
   	        solutions[i][j].value = v_arr[i] + u_arr[j] - solutions[i][j].cost;
+  	        if (solutions[i][j].value > 0) isoptimal = true;
             cntr+=1;
         }
       }
@@ -777,6 +780,9 @@ int main()
 		}
 		printf("\n");
 	}
+
+	if (isoptimal == true) printf("\n1 Решение оптимально");
+    else printf("\n0 Решение не оптимально");
 
 
 	return 0;
