@@ -122,11 +122,11 @@ struct point
 	int val;
 };
 
-struct where_reg
+/*struct where_reg
 {
 	char where;
 	int pos;
-};
+};*/
 
 int main()
 {
@@ -756,14 +756,14 @@ int main()
 
   while(cntr < x*y-(x+y-1))
   {
-      for(i=0;i<y;i++)
+    for(i=0;i<y;i++)
     {
       for(j=0;j<x;j++)
       {
         if (solutions[i][j].isbasic == false)
   	    {
   	        solutions[i][j].value = v_arr[i] + u_arr[j] - solutions[i][j].cost;
-  	        if (solutions[i][j].value > 0) isoptimal = true;
+  	        if (solutions[i][j].value <= 0) isoptimal = true;
             cntr+=1;
         }
       }
@@ -781,9 +781,47 @@ int main()
 		printf("\n");
 	}
 
-	if (isoptimal == true) printf("\n1 Решение оптимально");
+	if (isoptimal == true)
+	{
+	    printf("\n1 Решение оптимально");
+	    return 0;
+	}
     else printf("\n0 Решение не оптимально");
 
+    int points[x+y][4];
+    int pos = 0;
+
+    for(i=0;i<y;i++)
+    {
+      for(j=0;j<x;j++)
+      {
+        if (solutions[i][j].isbasic == true)
+  	    {
+  	        points[pos][0] = i;
+  	        points[pos][1] = j;
+  	        pos+=1;
+        }
+      }
+    }
+
+    for(i=0;i<x+y;i++)
+        printf("\n %d %d ", points[i][0], points[i][1]);
+
+    int max;
+
+    for(i=0;i<y;i++)
+    {
+      for(j=0;j<x;j++)
+      {
+        if (solutions[i][j].isbasic == false && solutions[i][j].value > 0)
+  	    {
+  	        max = solutions[i][j].value;
+  	        printf("\n!!!!!! %d !!!!!", max);
+  	        i=y;
+  	        break;
+        }
+      }
+    }
 
 	return 0;
 }
