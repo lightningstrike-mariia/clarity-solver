@@ -122,11 +122,12 @@ struct point
 	int val;
 };
 
-/*struct where_reg
+struct coordinates
 {
-	char where;
-	int pos;
-};*/
+	int x;
+	int y;
+	int value;
+};
 
 int main()
 {
@@ -139,7 +140,7 @@ int main()
 	unsigned int n;
 
 	FILE* problem;
-	problem = fopen("C:\\Users\\mariikas2023\\Documents\\vogel-approximation-method-in-c-main\\CLARITY\\tpfile.txt","r");
+	problem = fopen("tpfile.txt","r");
 
 	fscanf(problem, "%d,%d",&m,&n);
 
@@ -790,10 +791,10 @@ int main()
 
 	if (isoptimal == true)
 	{
-	    printf("\n1 Решение оптимально");
+	    printf("\n1 Решение оптимально\n");
 	    return 0;
 	}
-    else printf("\n0 Решение не оптимально");
+    else printf("\n0 Решение не оптимально\n");
 
     int points[x+y][4];
     int pos = 0;
@@ -811,10 +812,10 @@ int main()
       }
     }
 
-    for(i=0;i<x+y;i++)
-        printf("\n %d %d ", points[i][0], points[i][1]);
+    for(i=0;i<x+y-1;i++)
+        printf("\n %d %d ", points[i][0]+1, points[i][1]+1);
 
-    int max;
+    struct coordinates theta;
 
     for(i=0;i<y;i++)
     {
@@ -822,13 +823,59 @@ int main()
       {
         if (solutions[i][j].isbasic == false && solutions[i][j].value > 0)
   	    {
-  	        max = solutions[i][j].value;
-  	        printf("\n!!!!!! %d !!!!!", max);
+  	        theta.value = solutions[i][j].value;
+			theta.x = i;
+			theta.y = j;
+  	        printf("\n!!!!!! %d !!!!!\n", theta.value);
   	        i=y;
   	        break;
         }
       }
     }
+
+	for(i=0;i<y;i++)
+    {
+      for(j=0;j<x;j++)
+      {
+        if (solutions[i][j].isbasic == false && solutions[i][j].value > theta.value)
+  	    {
+  	        theta.value = solutions[i][j].value;
+			theta.x = i;
+			theta.y = j;
+  	        printf("\n!!!!!! %d !!!!!\n", theta.value);
+        }
+      }
+    }
+
+	solutions[theta.x][theta.y].isbasic = true;
+
+	for(i=0;i<y;i++)
+	{
+		for(j=0;j<x;j++)
+		{
+			printf(" %d ", solutions[i][j].isbasic);
+		}
+		printf("\n");
+	}
+
+	points[x+y-1][0] = theta.x;
+	points[x+y-1][1] = theta.y;
+
+	for(i=0;i<x+y;i++)
+        printf("\n %d %d ", points[i][0]+1, points[i][1]+1);
+
+	printf("\n");
+
+    printf("\nНАХОЖДЕНИЕ ЗАМКНУТОГО КОНТУРА\n");
+
+	/*for(i=0;i<x+y;i++)
+	{
+		for(j=0;j<1;j++)
+		{
+			if(j!=i && )
+		}
+	}*/
+
 
 	return 0;
 }
