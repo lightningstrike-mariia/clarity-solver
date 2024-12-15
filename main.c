@@ -868,13 +868,80 @@ int main()
 
     printf("\nНАХОЖДЕНИЕ ЗАМКНУТОГО КОНТУРА\n");
 
-	/*for(i=0;i<x+y;i++)
-	{
-		for(j=0;j<1;j++)
-		{
-			if(j!=i && )
-		}
-	}*/
+    for(i=0;i<x+y;i++)
+        {
+
+            points[i][3] = false;
+        }
+
+    bool cont = true;
+
+	while (cont == true)
+    {
+        for(i=0;i<x+y;i++)
+        {
+            points[i][2] = 0;
+        }
+
+        for(i=0;i<x+y;i++)
+        {
+            for(j=0;j<x+y;j++)
+            {
+                if(j!=i && points[j][0] == points[i][0] && points[j][1] > points[i][1] && points[i][3] != true && points[j][3] != true)
+                {
+                    points[i][2]+=1;
+                    break;
+                }
+            }
+            for(j=0;j<x+y;j++)
+            {
+                if(j!=i && points[j][0] == points[i][0] && points[j][1] < points[i][1] && points[i][3] != true && points[j][3] != true)
+                {
+                    points[i][2]+=1;
+                    break;
+                }
+            }
+            for(j=0;j<x+y;j++)
+            {
+                if(j!=i && points[j][0] > points[i][0] && points[j][1] == points[i][1]  && points[i][3] != true && points[j][3] != true)
+                {
+                    points[i][2]+=1;
+                    break;
+                }
+            }
+            for(j=0;j<x+y;j++)
+            {
+                if(j!=i && points[j][0] < points[i][0] && points[j][1] == points[i][1] && points[i][3] != true && points[j][3] != true)
+                {
+                    points[i][2]+=1;
+                    break;
+                }
+            }
+        }
+
+
+
+        for(i=0;i<x+y;i++)
+            printf("\n %d %d %d ", points[i][0]+1, points[i][1]+1, points[i][2]);
+
+        cont = false;
+
+        for(i=0;i<x+y;i++)
+        {
+            if(points[i][2]<2 && points[i][3]!=true)
+            {
+                points[i][3]=true;
+                cont = true;
+            }
+        }
+    }
+
+    printf("\n");
+
+    for(i=0;i<x+y;i++)
+    {
+        printf("\n %d %d %d %d", points[i][0]+1, points[i][1]+1, points[i][2], points[i][3]);
+    }
 
 
 	return 0;
