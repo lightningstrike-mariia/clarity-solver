@@ -919,7 +919,7 @@ int main()
             }
         }
 
-
+        printf("\n");
 
         for(i=0;i<x+y;i++)
             printf("\n %d %d %d ", points[i][0]+1, points[i][1]+1, points[i][2]);
@@ -942,6 +942,40 @@ int main()
     {
         printf("\n %d %d %d %d", points[i][0]+1, points[i][1]+1, points[i][2], points[i][3]);
     }
+
+    int buff = 0;
+
+    for(i=0;i<x+y;i++)
+    {
+        if (points[i][0] == theta.x && points[i][1] == theta.y)
+        {
+            buff = points[0][0];
+            points[0][0] = theta.x;
+            points[i][0] = buff;
+            buff = points[0][1];
+            points[0][1] = theta.y;
+            points[i][1] = buff;
+        }
+    }
+
+    printf("\n");
+    for(i=0;i<x+y;i++)
+    {
+        printf("\n %d %d %d %d", points[i][0]+1, points[i][1]+1, points[i][2], points[i][3]);
+    }
+
+    int notexcl=0;
+
+    for(i=0;i<x+y;i++)
+    {
+        if (points[i][3] == false)
+        {
+            notexcl++;
+        }
+    }
+    printf("\n\n %d",notexcl);
+
+    int loop_points[notexcl][2];
 
 
 	return 0;
