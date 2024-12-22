@@ -978,6 +978,7 @@ int main()
     int loop_points[notexcl][2];
 
     j = 0;
+
     for(i=0;i<x+y;i++)
     {
         if(points[i][3]==false)
@@ -992,6 +993,41 @@ int main()
     {
         printf("\n %d %d", loop_points[i][0]+1, loop_points[i][1]+1);
     }
+
+    int comparisons[notexcl-1][4];
+
+    j=0;
+    cntr = 0;
+    for(i=1;i<notexcl-1;i++)
+    {
+        if(loop_points[i][0] == loop_points[0][0] || loop_points[i][1] == loop_points[0][1])
+        {
+            comparisons[j][0] = loop_points[i][0];
+            comparisons[j][1] = loop_points[i][1];
+            printf("\n\n -%d %d- ", comparisons[j][0]+1, comparisons[j][1]+1);
+            cntr++;
+            j++;
+
+        }
+    }
+
+    printf("\n -- %d -- ", j);
+
+    while (j<notexcl)
+    {
+        comparisons[j][0] = -1;
+        comparisons[j][1] = -1;
+        j++;
+    }
+
+    printf("\n");
+
+    for(i=0;i<notexcl;i++)
+    {
+        printf("\n %d %d", comparisons[i][0]+1, comparisons[i][1]+1);
+    }
+
+    printf("\n -- %d -- ", cntr);
 
 	return 0;
 }
