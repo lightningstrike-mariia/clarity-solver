@@ -489,7 +489,7 @@ int main()
 					matrix[maxdelta.pos][i] = -1;
 				}
 				yignored[maxdelta.pos] = true;
-			        rows--;
+                rows--;
 			}
 			else if (modsup[maxdelta.pos] == moddem[mincostpos])
 			{
@@ -958,7 +958,7 @@ int main()
         }
     }
 
-    printf("\n");
+    printf("\n\nПеремещаем Θ в верхнюю ячейку:\n");
     for(i=0;i<x+y;i++)
     {
         printf("\n %d %d %d %d", points[i][0]+1, points[i][1]+1, points[i][2], points[i][3]);
@@ -973,7 +973,7 @@ int main()
             notexcl++;
         }
     }
-    printf("\n\n %d\n",notexcl);
+    printf("\n\nКоличество точек в замкнутом контуре: %d\n",notexcl);
 
     int loop_points[notexcl][2];
 
@@ -1027,7 +1027,7 @@ int main()
         printf("\n %d %d", comparisons[i][0]+1, comparisons[i][1]+1);
     }
 
-    printf("\n -- %d -- ", cntr);
+    printf("\nКоличество точек, совпадающих с выбранной по x или y: %d ", cntr);
 
 	return 0;
 }
