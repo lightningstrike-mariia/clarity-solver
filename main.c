@@ -973,10 +973,25 @@ int main()
             notexcl++;
         }
     }
-    printf("\n\n %d",notexcl);
+    printf("\n\n %d\n",notexcl);
 
     int loop_points[notexcl][2];
 
+    j = 0;
+    for(i=0;i<x+y;i++)
+    {
+        if(points[i][3]==false)
+        {
+            loop_points[j][0] = points[i][0];
+            loop_points[j][1] = points[i][1];
+            j++;
+        }
+    }
+
+    for(i=0;i<notexcl;i++)
+    {
+        printf("\n %d %d", loop_points[i][0]+1, loop_points[i][1]+1);
+    }
 
 	return 0;
 }
