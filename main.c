@@ -1,6 +1,6 @@
 #include "stdio.h"
 #include "stdlib.h"
-//#include "math.h"
+#include "math.h"
 #include "stdbool.h"
 
 int find2Min(int* arrptr, int len)
@@ -1013,7 +1013,7 @@ int main()
 
     printf("\n -- %d -- ", j);
 
-    while (j<notexcl)
+    while (j<notexcl-1)
     {
         comparisons[j][0] = -1;
         comparisons[j][1] = -1;
@@ -1022,12 +1022,39 @@ int main()
 
     printf("\n");
 
-    for(i=0;i<notexcl;i++)
+    for(i=0;i<notexcl-1;i++)
     {
         printf("\n %d %d", comparisons[i][0]+1, comparisons[i][1]+1);
     }
 
+    int intmd[notexcl-1];
+
+    for(i=0;i<notexcl-1;i++)
+    {
+        if (comparisons[i][0] >= 0 && comparisons[i][1] >= 0)
+        {
+            comparisons[i][2] = abs(comparisons[i][0]-loop_points[0][0]);
+            comparisons[i][3] = abs(comparisons[i][1]-loop_points[0][1]);
+            intmd[i] = sqrt(pow(comparisons[i][2],2) + pow(comparisons[i][3],2));
+        }
+        else
+        {
+            comparisons[i][2] = -1;
+            comparisons[i][3] = -1;
+            intmd[i] = -1;
+        }
+    }
+
     printf("\nКоличество точек, совпадающих с выбранной по x или y: %d ", cntr);
+
+    printf("\n");
+
+    for(i=0;i<notexcl-1;i++)
+    {
+        printf("\n %d %d %d", comparisons[i][2], comparisons[i][3], intmd[i]);
+    }
+
+    printf("\n\nmindistpos %d", find1Min(intmd, notexcl-1));
 
 	return 0;
 }
