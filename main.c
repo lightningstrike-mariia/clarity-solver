@@ -994,7 +994,7 @@ int main()
         printf("\n %d %d", loop_points[i][0]+1, loop_points[i][1]+1);
     }
 
-    int comparisons[notexcl-1][4];
+    int comparisons[notexcl-1][5];
 
     j=0;
     cntr = 0;
@@ -1004,19 +1004,21 @@ int main()
         {
             comparisons[j][0] = loop_points[i][0];
             comparisons[j][1] = loop_points[i][1];
-            printf("\n\n -%d %d- ", comparisons[j][0]+1, comparisons[j][1]+1);
+            comparisons[j][4] = i;
+            printf("\n\n -%d %d %d- ", comparisons[j][0]+1, comparisons[j][1]+1, comparisons[j][4]);
             cntr++;
             j++;
 
         }
     }
 
-    printf("\n -- %d -- ", j);
+    printf("\n -- %d -- ", comparisons[0][4]);
 
     while (j<notexcl-1)
     {
         comparisons[j][0] = -1;
         comparisons[j][1] = -1;
+        comparisons[j][4] = -1;
         j++;
     }
 
@@ -1024,7 +1026,7 @@ int main()
 
     for(i=0;i<notexcl-1;i++)
     {
-        printf("\n %d %d", comparisons[i][0]+1, comparisons[i][1]+1);
+        printf("\n %d %d %d", comparisons[i][0]+1, comparisons[i][1]+1, comparisons[i][4]);
     }
 
     int intmd[notexcl-1];
@@ -1054,7 +1056,12 @@ int main()
         printf("\n %d %d %d", comparisons[i][2], comparisons[i][3], intmd[i]);
     }
 
-    printf("\n\nmindistpos %d", find1Min(intmd, notexcl-1));
+    printf("\n\nmin dist pos %d", find1Min(intmd, notexcl-1));
 
+    buff = loop_points[comparisons[find1Min(intmd, notexcl-1)][4]][0];
+    loop_points[comparisons[find1Min(intmd, notexcl-1)][4]][0] = loop_points[1][0];
+    loop_points[1][0] = buff;
+
+    printf("\n\n    %d", loop_points[comparisons[find1Min(intmd, notexcl-1)][4]][0]+1);
 	return 0;
 }
